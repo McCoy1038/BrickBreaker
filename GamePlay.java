@@ -8,7 +8,7 @@ import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-public class GamePlay extends JPanel implements KeyListener, ActionListener{
+public class GamePlay extends JPanel implements KeyListener, ActionListener {
     
     private MapGenerator map; 
     private Timer timer;
