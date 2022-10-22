@@ -9,10 +9,9 @@ public class MapGenerator {
     }
     
     public MapGenerator(int row, int col){
-     map = new int[row][col];
      
         map = new int[row][col];
-
+        
     }
 
     public void draw(Graphics2D graphic){
