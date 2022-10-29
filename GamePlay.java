@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 
 public class GamePlay extends JPanel implements KeyListener, ActionListener {
     
@@ -109,6 +110,65 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e){
+        timer.start();
+        if(play){
+            if(new Rectangle(ballPosX, ballPosY, 20, 20).intersects(new Rectangle(playerX, 550, 30, 8))){
+                ballYdir = -ballYdir;
+                ballXdir = -2;
+            }
+            else if(new Rectangle(ballPosX, ballPosY, 20, 20).intersects(new Rectangle(playerX + 70, 550, 30, 8))){
+                ballYdir = -ballYdir;
+                ballXdir = ballXdir++;
+            }
+            else if (new Rectangle(ballPosX, ballPosY, 20, 20).intersects(new Rectangle(playerX + 30, 550, 40, 8))){
+                ballYdir = -ballYdir;
+            }
 
+            A: for(int i = 0; i < map.map.length; i++){
+                for(int j = 0; j < map.map[0].length; j++){
+                    if(map.map[i][j] > 0){
+
+                        int brickX = j * map.brickWidth + 80;
+                        int brickY = i * map.brickHeight + 50;
+                        int brickWidth = map.brickWidth;
+                        int brickHeight = map.brickHeight;
+
+                        Rectangle rect = new Rectangle(brickX, brickY, brickWidth, brickHeight);
+                        Rectangle ballRect = new Rectangle(ballPosX, ballPosY, 20, 20);
+                        Rectangle brickRect = rect;
+
+                        if(ballRect.intersects(brickRect)){
+                            map.setBrickValue(0, i, j);
+                            score += 5;
+                            totalBricks--;
+
+                            if(ballPosX + 19 <= brickRect.x || ballPosX + 1 >= brickRect.x + brickRect.width){
+                                ballXdir = -ballXdir;
+                            }
+                            else{
+                                ballYdir = -ballYdir;
+                            }
+
+                            break A;
+                        }
+                    }
+                }
+            }
+
+            ballPosX += ballXdir;
+            ballPosY += ballYdir;
+
+            if(ballPosX < 0){
+                ballXdir = -ballXdir;
+            }
+            if(ballPosY < 0){
+                ballYdir = -ballYdir;
+            }
+            if(ballPosX > 670){
+                ballXdir = -ballXdir;
+            }
+
+            repaint();
+        }
     }
 }
