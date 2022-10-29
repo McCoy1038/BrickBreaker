@@ -20,6 +20,7 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
     private int ballXdir = -1;
     private int ballYdir = -2;
     private boolean play = false;
+    private boolean pause = false;
     private MapGenerator map; 
     private Timer timer;
     private int delay = 8;
@@ -95,7 +96,14 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
 
     @Override
     public void keyPressed(KeyEvent e){
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+           
+            play = false;
+            pause = true;
+
+        }
         if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+            pause = false;
             if(playerX >= 600){
                 playerX = 600;
             }
@@ -104,6 +112,7 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
             }
         }
         if(e.getKeyCode() == KeyEvent.VK_LEFT){
+            pause = false;
             if(playerX < 10){
                 playerX = 10;
             }
@@ -112,7 +121,7 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
             }
         }
         if(e.getKeyCode() == KeyEvent.VK_ENTER){
-            if(!play){
+            if(!play && !pause){
                 play = true;
                 ballPosX = 120;
                 ballPosY = 350;
@@ -121,7 +130,7 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
                 playerX = 310;
                 score = 0;
                 totalBricks = 48;
-                map = new MapGenerator(3, 7);
+                map = new MapGenerator(4, 12);
 
                 repaint();
             }
