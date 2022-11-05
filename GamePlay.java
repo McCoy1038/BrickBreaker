@@ -68,7 +68,7 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
             ballXdir = 0;
             ballYdir = 0;
 
-            g.setColor(Color.red);
+            g.setColor(Color.white);
             g.setFont(new Font("serif", Font.BOLD, 30));
             g.drawString("You Won!", 260, 300);
 
@@ -84,12 +84,26 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
 
             g.setColor(Color.red);
             g.setFont(new Font("serif", Font.BOLD, 30));
-            g.drawString("Game Over, Scores: " + score, 190, 300);
+            g.drawString("Game Over, Score: " + score, 190, 300);
 
             g.setColor(Color.red);
             g.setFont(new Font("serif", Font.BOLD, 20));
             g.drawString("Press (Enter) to Restart", 230, 350);
         }
+
+        /*if(pause == true){
+
+            play = false;
+            g.setColor(Color.blue);
+            g.setFont(new Font("serif", Font.BOLD, 30));
+            g.drawString("Paused", 190, 300);
+
+        }
+        else{
+            pause = false;
+            play = true;
+        }
+        */
 
         g.dispose();
     }
@@ -100,6 +114,7 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
            
             play = false;
             pause = true;
+
 
         }
         if(e.getKeyCode() == KeyEvent.VK_RIGHT){
