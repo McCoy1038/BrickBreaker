@@ -35,6 +35,7 @@ public class MapGenerator {
                     graphic.setStroke(new BasicStroke(3));
                     graphic.setColor(Color.black);
                     graphic.drawRect(j * brickWidth + 80, i * brickHeight + 50, brickWidth, brickHeight);
+
                 }
             }
         }
